@@ -6,7 +6,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { useState } from "react";
 import data from "./data.js";
-import Detail from "./pages/Detail.js";
+import Detail from "./pages/detail.js";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 // import { Button, Nav, Navbar, Container } from "react-bootstrap";
 
@@ -57,7 +57,7 @@ function App() {
             </>
           }
         />
-        <Route path="/detail" element={<Detail />} />
+        <Route path="/detail/:iid" element={<Detail shoes={shoes} />} />
 
         <Route path="/about" element={<About />}>
           <Route path="member" element={<div>맴버임</div>} />
