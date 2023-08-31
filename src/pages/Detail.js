@@ -4,11 +4,18 @@ import styled from "styled-components";
 
 function Detail(props) {
   let [alert, setAlert] = useState(true);
+
   useEffect(() => {
-    setTimeout(() => {
-      // setAlert(!alert);
+    let a = setTimeout(() => {
       setAlert(false);
     }, 3000);
+    //useDffect가 실행되기 전에 실행되는 return~~
+    console.log(2);
+    return () => {
+      console.log(1);
+      //타이머 제거해주는 함수
+      clearTimeout(a);
+    };
   }, []);
 
   let [count, setCount] = useState(0);
