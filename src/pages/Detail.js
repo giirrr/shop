@@ -9,7 +9,6 @@ let RedInput = styled.input`
 
 function Detail(props) {
   let [alert, setAlert] = useState(true);
-  let [alarm, setAlarm] = useState(true);
 
   useEffect(() => {
     let a = setTimeout(() => {
@@ -24,7 +23,19 @@ function Detail(props) {
 
   let { iid } = useParams();
   const 상품 = props.shoes.find((e) => e.id == iid);
-
+  function Detail(){
+    let [num, setNum] = useState('')
+  
+    useEffect(()=>{
+      if (isNaN(num) == true){
+        alert('그러지마세요')
+      }
+    }, [num])
+  
+    return (
+      <input onChange((e)=>{ setNum(e.target.value) }) />
+    )
+  }
   return (
     <div className="container">
       {alert === true ? (
@@ -46,16 +57,7 @@ function Detail(props) {
           />
         </div>
         <div className="col-md-6">
-          <RedInput
-            placeholder="Search For.."
-            onChange={(e) => {
-              setAlarm(() => {
-                e.target.value !== typeof int ? (
-                  <alert>그러지마세요</alert>
-                ) : null;
-              });
-            }}
-          ></RedInput>
+          <RedInput placeholder="Search For.." onChange={setAlert}></RedInput>
           <h4 className="pt-5">{props.shoes[상품.id].title}</h4>
           <p>{props.shoes[상품.id].content}</p>
           <p>{상품.content}</p>
