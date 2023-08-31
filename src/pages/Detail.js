@@ -3,12 +3,13 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
 function Detail(props) {
-  let [time, setTime] = useState(0);
+  let [alert, setAlert] = useState(true);
   useEffect(() => {
     setTimeout(() => {
-      setTime(!time);
-    }, 4000);
-  });
+      // setAlert(!alert);
+      setAlert(false);
+    }, 3000);
+  }, []);
 
   let [count, setCount] = useState(0);
 
@@ -18,8 +19,8 @@ function Detail(props) {
   return (
     <div className="container">
       {/* <div에 함수 씌울려면 {ㄴㅁㄹㅁ ===true?(<div></div>):null} 이런식으로 작성해야함 */}
-      {time === 0 ? (
-        <div className="alert alert-warning">4초 이내 구매시 할인</div>
+      {alert === true ? (
+        <div className="alert alert-warning">3초 이내 구매시 할인</div>
       ) : null}
 
       <button
