@@ -10,6 +10,8 @@ import data from "./data.js";
 
 function App() {
   let [shoes, setShoes] = useState(data);
+  let [id, setId] = useState(0);
+
   return (
     <div className="App">
       <Navbar bg="primary" data-bs-theme="dark" className="shop_navbar">
@@ -27,38 +29,50 @@ function App() {
       <div className="main-bg"></div>
       <div className="container">
         <div className="row">
-          <div className="col-md-4">
-            <img
-              src="https://codingapple1.github.io/shop/shoes1.jpg"
-              width="80%"
-            />
-            {/*             
-          그냥 입력하면 텍스트로 들어가고 {}로 감싸 줘야함
-            []대괄호는 보통 array [2]이런식
-            {}중괄호는 보통 object .title .id이런식  */}
-            <h4>{shoes[0].title}</h4>
-            <p>{shoes[0].price} 원</p>
-          </div>
-          <div className="col-md-4">
-            <img
-              src="https://codingapple1.github.io/shop/shoes2.jpg"
-              width="80%"
-            />
-            <h4>{shoes[1].title}</h4>
-            <p>{shoes[1].price} 원</p>
-          </div>
-          <div className="col-md-4">
-            <img
-              src="https://codingapple1.github.io/shop/shoes3.jpg"
-              width="80%"
-            />
-            <h4>{shoes[2].title}</h4>
-            <p>{shoes[2].price} 원</p>
-          </div>
+          {shoes.map(function (a, i) {
+            return (
+              <div
+                className="col-md-4"
+                //함수를 어디에 만들지를 모르겠음 클릭 함수도 아니고.
+                onClick={() => {
+                  setId(i);
+                }}
+              >
+                <img
+                  // 그리고 사진은 어떻게 다르게 표시할지???
+                  src="https://codingapple1.github.io/shop/shoes3.jpg"
+                  width="80%"
+                />
+                <h4>{shoes[i].title}</h4>
+                <p>{shoes[i].price} 원</p>
+              </div>
+            );
+          })}
+          {/* 컴포넌트를 map으로 어케 하는지.. */}
+          <Item shoes={shoes} id={id} />
+          <Item shoes={shoes} id={1} />
+          <Item shoes={shoes} id={2} />
         </div>
       </div>
     </div>
   );
+}
+function Item(props) {
+  {
+    console.log(props.id);
+    {
+      return (
+        <div className="col-md-4" key={30}>
+          <img
+            src="https://codingapple1.github.io/shop/shoes3.jpg"
+            width="80%"
+          />
+          <h4>{props.shoes[props.id].title}</h4>
+          <p>{props.shoes[props.id].price} 원</p>
+        </div>
+      );
+    }
+  }
 }
 
 export default App;
