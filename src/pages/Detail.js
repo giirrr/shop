@@ -1,38 +1,29 @@
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
-// let YellowBtn = styled.button`
-//   background: green;
-//   color: white;
-//   padding: 10px;
-//   border: none;
-// `;
-let YellowBtn = styled.button`
-  background: ${(props) => props.namom};
-  color: ${(props) => (props.namom == "blue" ? "white" : "yellow")};
-  // color: ${(e) => (e.namom == "blue" ? "white" : "yellow")};
-  padding: 10px;
-  border: none;
-`;
-
-let NewBtn = styled.button(YellowBtn);
-
-let Box = styled.div`
-  background: grey;
-  padding: 12px;
-`;
-
 function Detail(props) {
+  useEffect(() => {
+    console.log("안녕");
+  });
+
+  setTimeout(() => {}, 1000);
+
+  let [count, setCount] = useState(0);
+
   let { iid } = useParams();
   const 상품 = props.shoes.find((e) => e.id == iid);
-  console.log(iid);
-  console.log(상품);
+
   return (
     <div className="container">
-      <Box>
-        <YellowBtn namom="blue">버튼</YellowBtn>
-        <YellowBtn namom="green">버튼</YellowBtn>
-      </Box>
+      {count}
+      <button
+        onClick={() => {
+          setCount(count + 1);
+        }}
+      >
+        버튼
+      </button>
       <div className="row">
         <div className="col-md-6">
           <img
