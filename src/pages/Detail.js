@@ -3,11 +3,12 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
 function Detail(props) {
+  let [time, setTime] = useState(0);
   useEffect(() => {
-    console.log("안녕");
+    setTimeout(() => {
+      setTime(!time);
+    }, 4000);
   });
-
-  setTimeout(() => {}, 1000);
 
   let [count, setCount] = useState(0);
 
@@ -16,7 +17,11 @@ function Detail(props) {
 
   return (
     <div className="container">
-      {count}
+      {/* <div에 함수 씌울려면 {ㄴㅁㄹㅁ ===true?(<div></div>):null} 이런식으로 작성해야함 */}
+      {time === 0 ? (
+        <div className="alert alert-warning">4초 이내 구매시 할인</div>
+      ) : null}
+
       <button
         onClick={() => {
           setCount(count + 1);
