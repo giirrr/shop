@@ -29,9 +29,11 @@ function App() {
       <div className="main-bg"></div>
       <div className="container">
         <div className="row">
-          <Item shoes={shoes[0]} i={1} />
-          <Item shoes={shoes[1]} i={2} />
-          <Item shoes={shoes[2]} i={3} />
+          {shoes.map(function (a, i) {
+            //i는 0,1,2 니까
+            // return <Item shoes={shoes[i]} i={i + 1} />;  //요래
+            return <Item shoes={shoes[i]} i={i} />; //요래
+          })}
         </div>
       </div>
     </div>
@@ -42,7 +44,10 @@ function Item(props) {
   return (
     <div className="col-md-4" key={30}>
       <img
-        src={"https://codingapple1.github.io/shop/shoes" + props.i + ".jpg"}
+        // src={"https://codingapple1.github.io/shop/shoes" + props.i + ".jpg"}//요래 하거나
+        src={
+          "https://codingapple1.github.io/shop/shoes" + (props.i + 1) + ".jpg"
+        } //요래 하거나
         width="80%"
       />
       <h4>{props.shoes.title}</h4>
