@@ -2,18 +2,20 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
+let RedInput = styled.input`
+  border-color: #f55154;
+  border-width: 5px;
+`;
+
 function Detail(props) {
   let [alert, setAlert] = useState(true);
+  let [alarm, setAlarm] = useState(true);
 
   useEffect(() => {
     let a = setTimeout(() => {
       setAlert(false);
     }, 3000);
-    //useDffect가 실행되기 전에 실행되는 return~~
-    console.log(2);
     return () => {
-      console.log(1);
-      //타이머 제거해주는 함수
       clearTimeout(a);
     };
   }, []);
@@ -25,7 +27,6 @@ function Detail(props) {
 
   return (
     <div className="container">
-      {/* <div에 함수 씌울려면 {ㄴㅁㄹㅁ ===true?(<div></div>):null} 이런식으로 작성해야함 */}
       {alert === true ? (
         <div className="alert alert-warning">3초 이내 구매시 할인</div>
       ) : null}
@@ -45,6 +46,16 @@ function Detail(props) {
           />
         </div>
         <div className="col-md-6">
+          <RedInput
+            placeholder="Search For.."
+            onChange={(e) => {
+              setAlarm(() => {
+                e.target.value !== typeof int ? (
+                  <alert>그러지마세요</alert>
+                ) : null;
+              });
+            }}
+          ></RedInput>
           <h4 className="pt-5">{props.shoes[상품.id].title}</h4>
           <p>{props.shoes[상품.id].content}</p>
           <p>{상품.content}</p>
