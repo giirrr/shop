@@ -15,6 +15,8 @@ function App() {
   let [shoes, setShoes] = useState(data);
   let navigate = useNavigate();
 
+  let [loaddata, setLoaddata] = useState("");
+
   return (
     <div className="App">
       <Navbar bg="primary" data-bs-theme="dark" className="shop_navbar">
@@ -61,6 +63,14 @@ function App() {
                     .get("https://codingapple1.github.io/shop/data2.json")
                     .then((결과) => {
                       console.log(결과.data);
+                      setLoaddata(결과.data);
+                      shoes.push(loaddata);
+                      console.log(shoes);
+                      {
+                        shoes.map(function (a, i) {
+                          return <Item shoes={shoes[i]} i={i} />;
+                        });
+                      }
                     })
                     .catch(() => {
                       console.log("실패함ㅅㄱ ");
