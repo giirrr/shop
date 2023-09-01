@@ -9,6 +9,7 @@ import data from "./data.js";
 import Detail from "./pages/detail.js";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 // import { Button, Nav, Navbar, Container } from "react-bootstrap";
+import axios from "axios";
 
 function App() {
   let [shoes, setShoes] = useState(data);
@@ -54,6 +55,20 @@ function App() {
                   })}
                 </div>
               </div>
+              <button
+                onClick={() => {
+                  axios
+                    .get("https://codingapple1.github.io/shop/data2.json")
+                    .then((결과) => {
+                      console.log(결과.data);
+                    })
+                    .catch(() => {
+                      console.log("실패함ㅅㄱ ");
+                    });
+                }}
+              >
+                버튼
+              </button>
             </>
           }
         />

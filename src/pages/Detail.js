@@ -23,19 +23,7 @@ function Detail(props) {
 
   let { iid } = useParams();
   const 상품 = props.shoes.find((e) => e.id == iid);
-  function Detail(){
-    let [num, setNum] = useState('')
-  
-    useEffect(()=>{
-      if (isNaN(num) == true){
-        alert('그러지마세요')
-      }
-    }, [num])
-  
-    return (
-      <input onChange((e)=>{ setNum(e.target.value) }) />
-    )
-  }
+
   return (
     <div className="container">
       {alert === true ? (
