@@ -1,3 +1,14 @@
+.start {
+  opacity: 0;
+  transform: scale(0);
+}
+.end {
+  opacity: 1;
+  transform: scale(1);
+  transition: all 3s;
+  /* transition: opacity 3s; */
+}
+
 .App {
   text-align: center;
 }

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Nav from "react-bootstrap/Nav";
+import "../App.css";
 
 let RedInput = styled.input`
   border-color: #f55154;
@@ -89,62 +90,72 @@ function Detail(props) {
         </Nav.Item>
       </Nav>
       <TabContent 탭={탭} />
-      {/* {탭 == 0 ? <div>내용0</div> : null}
-      {탭 == 1 ? <div>내용1</div> : null}
-      {탭 == 2 ? <div>내용2</div> : null} */}
     </div>
   );
 }
-//html 안에서는 if 조건문 만들 수 없어서 이렇게 아예 밖에서는 자유롭게 사용가능
-// if (탭 == 0) {
-//   <div>내용0</div>;
-// } else if (탭 == 1) {
-//   <div>내용1</div>;
-// } else if (탭 == 1) {
-//   <div>내용2</div>;
-// }
-//이렇게만 작성하면 바로 오류나니까 이걸 컴포넌트 안에 작성해야함.
 
-// function TabContent({ 탭 }) {
-//   if (탭 == 0) {
-//     return <div>내용0</div>;
-//   } else if (탭 == 1) {
-//     return <div>내용1</div>;
-//   } else if (탭 == 2) {
-//     return <div>내용2</div>;
-//   } else {
-//     return null;
-//   }
-//팁 1 props. 으로 불러와서 쓰기 귀찮으면 {탭}으로 불러와서 사용
-//팁 1-1 props가 여러개면 {탭, props2} porps2는 이름 아무거나 그냥 기본 이름 넣은거임 꼭 저거X
-
-//팁 2 function안에 if없이
 function TabContent({ 탭 }) {
-  return [<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][탭];
+  let [fade, setFade] = useState("");
+  //변수 임의로 지정, 기본값은 텍스트로 넣음
+  useEffect(() => {
+    //시간 미루기 0.1초 후에 코드 실행 되도록
+    setTimeout(() => {
+      setFade("end"); //2빠
+    }, 10);
+    return () => {
+      setFade(""); //1빠
+    };
+  }, [탭]);
+
+  //   useEffect(() => {
+  // let a= setTimeout(() => {
+  //       setFade("end");
+  //     }, 10);
+  //     return () => {
+  //       clearTimeout(a)
+  //       setFade("");
+  //     };
+  //   }, [탭]);
+  //타이머를 삭제하고 싶으면
+  //이렇게 하면 타이머 삭제 가능
+  return (
+    //변수를 문자 html중간에 넣고 싶다면 <div className="start">
+    //중괄호 먼저 감싸고  className ={'start'}
+    //넣을 변수가 중간에 들어가면 ''+fade+''한쪽이면 ''+fade}로
+
+    //혹은 문자 중간에 변수를 넣을 때 calssName={`문자${변수}`}
+    //Name={`start ${fade}`}
+
+    //주의 클래스명들은 띄어쓰기가 있어야 여러개 중복 가능
+    //ㄴ 당연히 안 띄우고 이어지면 하나의 새로운 클래스로 인식하니까.
+    //ex) {"start "}
+    <div className={"start " + fade}>
+      {[<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][탭]}
+    </div>
+  );
+  // return [<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][탭];
+  //이렇게 애니메이션 주면 내용0,1,2에 다 줘야하니 너무 귀찮음.
+  //그래서 그냥 안에 내용물을 다 div로 감싸줌  return <div>{[<div~~어쩌고]}</div>
+  //return 오른쪽 html이 쫌 길다 하면 소괄호로 감싸주는게 보다 안정적임
+  // => return (<div className~~~~</div>)
 }
-// ->[<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][0] 이면 첫번쨰 내용0
-// ->[<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][1] 이면 두번째 내용1
-// ->[<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][2] 이면 세번째 내용2 나옴
 
-// if (props.탭 == 0) {
-//   return <div>내용0</div>;
-// } else if (props.탭 == 1) {
-//   return <div>내용1</div>;
-// } else if (props.탭 == 2) {
-//   return <div>내용2</div>;
-// } else {
-//   return null;
-// }
+// useEffect(()=>{
+//   setFade('end')
+// },[탭])
+//useEffect 실행하기 전에 특정코드 실행하고 싶으면
+//useEffect는 cleanup function 사용가능 = useEffect실행하기전에 특정코드 실행하고 싶으면
+// useEffect(()=>{
+//   setFade('end')
+//   return ()=>{
 
-// if (props.탭 == 0) {
-//   return <div>내용0</div>;
-// }
-// if (props.탭 == 1) {
-//   return <div>내용1</div>;
-// }
-// if (props.탭 == 2) {
-//   return <div>내용2</div>;
-// }    이렇게 해도 위에 코드랑 같은 결과 도출
+//   }
+// },[탭])
+//함수칸 안에 return ()=>{
+// 이 안에 작성해주면 됨
+//}
 
-//여기서 컴포넌트는 return이 없으면 제기능을 못하기 때문에 if문 쓰고 return 다 붙여줘야함
+//리액트 18버전 이상에서는 automatic batching 기능이 생김
+//state변경함수들이 근처에 있다 -> 그러면 이것들을 다 합쳐서 state를 딱 한번만 변경을 해줌
+//정확히는 state 변경함수를 다 처리하고 마지막에 한 번만 재렌더링
 export default Detail;
