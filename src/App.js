@@ -57,6 +57,8 @@ function App() {
                   })}
                 </div>
               </div>
+              {/* ajax 2 응용문제 보고 참고 */}
+              {/* https://codingapple.com/forums/topic/react-%ec%84%9c%eb%b2%84%ed%86%b5%ec%8b%9d-ajax2-%ec%9d%91%ec%9a%a9%eb%ac%b8%ec%a0%9c/ */}
               <button
                 onClick={() => {
                   axios
