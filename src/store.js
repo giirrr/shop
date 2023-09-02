@@ -27,7 +27,13 @@ let cartdata = createSlice({
     { id: 0, name: "White and Black", count: 2 },
     { id: 2, name: "Grey Yordan", count: 1 },
   ], //array나 object 상관없이 넣을 수 있음
+  reducers: {
+    changeCount(state) {
+      return state.count + 1;
+    },
+  },
 });
+export let { changeCount } = cartdata.actions;
 
 export default configureStore({
   reducer: {

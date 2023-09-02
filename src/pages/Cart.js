@@ -1,11 +1,11 @@
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { changeName } from "./../store.js";
+import { changeName, changeCount } from "./../store.js";
 
 function Cart() {
   let state = useSelector((state) => state);
   let dispatch = useDispatch();
-  //store.js로 요청을 보내주는 함수
+  //store.js로 요청을 보내주는 함수 ,메세지를 보내줌
   return (
     <div>
       {state.user}의 장바구니
@@ -28,6 +28,8 @@ function Cart() {
                 <button
                   onClick={() => {
                     dispatch(changeName());
+                    dispatch(changeCount());
+                    //changeName()실행해달라고 store.js에 부탁
                   }}
                 >
                   +
