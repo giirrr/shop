@@ -9,9 +9,18 @@ let stock = createSlice({
   initialState: [10, 11, 12],
 });
 
+let cartdata = createSlice({
+  name: "cartdata",
+  initialState: [
+    { id: 0, name: "White and Black", count: 2 },
+    { id: 2, name: "Grey Yordan", count: 1 },
+  ],
+});
+
 export default configureStore({
   reducer: {
     user: user.reducer,
     작명: stock.reducer,
+    바구니용: cartdata.reducer,
   },
 });
