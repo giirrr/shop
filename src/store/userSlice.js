@@ -18,5 +18,4 @@ let user = createSlice({
 //그래서 문자하나만 필요해도 'kim'일부러 {name : 'kim'}안에 담기도 함 이래야 수정이 편리하니까
 
 export let { changeName, increase } = user.actions;
-//state 변경함수들 남음
 export default user;

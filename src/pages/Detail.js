@@ -4,11 +4,7 @@ import styled from "styled-components";
 import Nav from "react-bootstrap/Nav";
 import { useDispatch, useSelector } from "react-redux";
 import "../App.css";
-import { plusitem } from "../store";
-
-//이런식으로 불러오면 사용가능
-//지금 경로에서 ./../    에서 ../ 한 폴더 위로 가서 ./ App.js 찾는다
-//디테일.js는 pages 폴더에 감싸져 있기 떄문에 한폴더 위로 =src로 가서 App.js찾는
+import { addItem } from "./../store.js";
 
 let RedInput = styled.input`
   border-color: #f55154;
@@ -20,7 +16,7 @@ function Detail(props) {
   const 상품 = props.shoes.find((e) => e.id == iid);
   let [alert, setAlert] = useState(true);
   let [탭, 탭변경] = useState(0);
-  // 상태는 내용0,1,2 세개가 있으니 세가지를 표현할 수 있는 숫자를 초기값으로
+
   let state = useSelector((state) => state);
   let dispatch = useDispatch();
 
@@ -61,7 +57,7 @@ function Detail(props) {
           <button
             className="btn btn-danger"
             onClick={() => {
-              dispatch(plusitem());
+              dispatch(addItem({ id: 1, name: "Red Knit", count: 1 }));
             }}
           >
             주문하기

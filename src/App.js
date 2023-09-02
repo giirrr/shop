@@ -42,7 +42,13 @@ function App() {
             >
               Detail
             </Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
+            <Nav.Link
+              onClick={() => {
+                navigate("/Cart");
+              }}
+            >
+              Cart
+            </Nav.Link>
           </Nav>
         </Container>
       </Navbar>

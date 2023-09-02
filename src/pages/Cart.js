@@ -1,7 +1,7 @@
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { changeName, increase } from "./../store/userSlice.js";
-import { changeCount } from "./../store.js";
+import { addCount } from "./../store.js";
 
 function Cart() {
   let state = useSelector((state) => state);
@@ -29,15 +29,16 @@ function Cart() {
           </tr>
         </thead>
         <tbody>
-          {state.바구니용.map((a, i) => (
+          {state.cart.map((a, i) => (
             <tr key={i}>
-              <td>{state.바구니용[i].id}</td>
-              <td>{state.바구니용[i].name}</td>
-              <td>{state.바구니용[i].count}</td>
+              <td>{state.cart[i].id}</td>
+              <td>{state.cart[i].name}</td>
+              <td>{state.cart[i].count}</td>
               <td>
                 <button
                   onClick={() => {
-                    dispatch(changeCount(i));
+                    // dispatch(addCount(i)); //이렇게 해도 잘 작동하는데 버그 미리 잡기위해
+                    dispatch(addCount(state.cart[i].id)); //버튼 옆의 id
                   }}
                 >
                   +
