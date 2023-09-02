@@ -2,7 +2,9 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Nav from "react-bootstrap/Nav";
+import { useDispatch, useSelector } from "react-redux";
 import "../App.css";
+import { plusitem } from "../store";
 
 //이런식으로 불러오면 사용가능
 //지금 경로에서 ./../    에서 ../ 한 폴더 위로 가서 ./ App.js 찾는다
@@ -19,6 +21,8 @@ function Detail(props) {
   let [alert, setAlert] = useState(true);
   let [탭, 탭변경] = useState(0);
   // 상태는 내용0,1,2 세개가 있으니 세가지를 표현할 수 있는 숫자를 초기값으로
+  let state = useSelector((state) => state);
+  let dispatch = useDispatch();
 
   let [fade2, setFade2] = useState("");
 
@@ -54,7 +58,14 @@ function Detail(props) {
           <p>{props.shoes[상품.id].content}</p>
           <p>{상품.content}</p>
           <p>{상품.price}</p>
-          <button className="btn btn-danger">주문하기</button>
+          <button
+            className="btn btn-danger"
+            onClick={() => {
+              dispatch(plusitem());
+            }}
+          >
+            주문하기
+          </button>
         </div>
       </div>
 
