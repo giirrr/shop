@@ -2,18 +2,19 @@ import { configureStore, createSlice } from "@reduxjs/toolkit";
 
 let user = createSlice({
   name: "user",
-  initialState: "kim",
+  initialState: { name: "kim", age: 20 },
   reducers: {
-    changeName(
-      state //기존state:kim을 뜻함
-    ) {
-      return "john " + state;
+    //array/object의 경우 return없이 직접 수정해도 state 변경됨
+    changeName(state) {
+      state.name = "park";
     },
-    ㄴㅁㄹㅁㄴ() {},
+    changeAge(state) {
+      state.age = state.age + 1;
+    },
   },
 });
 
-export let { changeName } = user.actions;
+export let { changeName, changeAge } = user.actions;
 //state 변경함수들 남음
 
 let stock = createSlice({
@@ -26,14 +27,8 @@ let cartdata = createSlice({
   initialState: [
     { id: 0, name: "White and Black", count: 2 },
     { id: 2, name: "Grey Yordan", count: 1 },
-  ], //array나 object 상관없이 넣을 수 있음
-  reducers: {
-    changeCount(state) {
-      return state.count + 1;
-    },
-  },
+  ],
 });
-export let { changeCount } = cartdata.actions;
 
 export default configureStore({
   reducer: {
