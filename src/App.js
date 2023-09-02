@@ -4,18 +4,20 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { useState } from "react";
+import { createContext, useState } from "react";
 import data from "./data.js";
 import Detail from "./pages/detail.js";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 // import { Button, Nav, Navbar, Container } from "react-bootstrap";
 import axios from "axios";
 
+export let Context1 = createContext();
+//갖다 쓰고 싶으면 export 붙여놓으면 자식 파일에서 불러올 수 잇음
+
 function App() {
   let [shoes, setShoes] = useState(data);
+  let [재고] = useState([10, 11, 12]);
   let navigate = useNavigate();
-
-  let [loaddata, setLoaddata] = useState("");
 
   return (
     <div className="App">
@@ -57,8 +59,6 @@ function App() {
                   })}
                 </div>
               </div>
-              {/* ajax 2 응용문제 보고 참고 */}
-              {/* https://codingapple.com/forums/topic/react-%ec%84%9c%eb%b2%84%ed%86%b5%ec%8b%9d-ajax2-%ec%9d%91%ec%9a%a9%eb%ac%b8%ec%a0%9c/ */}
               <button
                 onClick={() => {
                   axios
@@ -80,7 +80,14 @@ function App() {
             </>
           }
         />
-        <Route path="/detail/:iid" element={<Detail shoes={shoes} />} />
+        <Route
+          path="/detail/:iid"
+          element={
+            <Context1.Provider value={{ 재고, shoes }}>
+              <Detail shoes={shoes} />
+            </Context1.Provider>
+          }
+        />
 
         <Route path="/about" element={<About />}>
           <Route path="member" element={<div>맴버임</div>} />
