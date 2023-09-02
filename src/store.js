@@ -1,21 +1,5 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
-
-let user = createSlice({
-  name: "user",
-  initialState: { name: "kim", age: 20 },
-  reducers: {
-    //array/object의 경우 return없이 직접 수정해도 state 변경됨
-    changeName(state) {
-      state.name = "park";
-    },
-    changeAge(state) {
-      state.age = state.age + 1;
-    },
-  },
-});
-
-export let { changeName, changeAge } = user.actions;
-//state 변경함수들 남음
+import user from "./store/userSlice.js";
 
 let stock = createSlice({
   name: "stock",

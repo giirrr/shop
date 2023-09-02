@@ -1,6 +1,6 @@
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { changeAge, changeName } from "./../store.js";
+import { changeName, increase } from "./../store/userSlice.js";
 
 function Cart() {
   let state = useSelector((state) => state);
@@ -13,8 +13,8 @@ function Cart() {
       </h6>
       <button
         onClick={() => {
-          dispatch(changeAge());
-        }}
+          dispatch(increase(100));
+        }} //디스패치가 메세지 보내는거라면, 여기서 100은 메세지에 실어보내는 화물임
       >
         버튼
       </button>
