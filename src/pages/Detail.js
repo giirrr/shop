@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Nav from "react-bootstrap/Nav";
 import "../App.css";
-import { Context1 } from "./../App.js";
+
 //이런식으로 불러오면 사용가능
 //지금 경로에서 ./../    에서 ../ 한 폴더 위로 가서 ./ App.js 찾는다
 //디테일.js는 pages 폴더에 감싸져 있기 떄문에 한폴더 위로 =src로 가서 App.js찾는
@@ -14,11 +14,6 @@ let RedInput = styled.input`
 `;
 
 function Detail(props) {
-  let a = useContext(Context1);
-  //보관함 헤체해주는 함수 => object형식으로 남아있음
-  let { 재고, shoes } = useContext(Context1);
-  //이런식으로 만들면 다루기 쉽게 꺼내올 수 있음
-
   let { iid } = useParams();
   const 상품 = props.shoes.find((e) => e.id == iid);
   let [alert, setAlert] = useState(true);
@@ -62,7 +57,6 @@ function Detail(props) {
           <button className="btn btn-danger">주문하기</button>
         </div>
       </div>
-      {재고[0]}
 
       <Nav variant="tabs" defaultActiveKey="link0">
         <Nav.Item>
@@ -102,7 +96,6 @@ function Detail(props) {
 }
 
 function TabContent({ 탭 }) {
-  let { 재고, shoes } = useContext(Context1);
   let [fade, setFade] = useState("");
   //변수 임의로 지정, 기본값은 텍스트로 넣음
   useEffect(() => {
@@ -117,7 +110,7 @@ function TabContent({ 탭 }) {
 
   return (
     <div className={"start " + fade}>
-      {[<div>{재고}</div>, <div>내용1</div>, <div>내용2</div>][탭]}
+      {[<div></div>, <div>내용1</div>, <div>내용2</div>][탭]}
     </div>
   );
 }

@@ -10,6 +10,7 @@ import Detail from "./pages/detail.js";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 // import { Button, Nav, Navbar, Container } from "react-bootstrap";
 import axios from "axios";
+import Cart from "./pages/Cart.js";
 
 export let Context1 = createContext();
 //갖다 쓰고 싶으면 export 붙여놓으면 자식 파일에서 불러올 수 잇음
@@ -80,14 +81,8 @@ function App() {
             </>
           }
         />
-        <Route
-          path="/detail/:iid"
-          element={
-            <Context1.Provider value={{ 재고, shoes }}>
-              <Detail shoes={shoes} />
-            </Context1.Provider>
-          }
-        />
+        <Route path="/detail/:iid" element={<Detail shoes={shoes} />} />
+        <Route path="/cart" element={<Cart />}></Route>
 
         <Route path="/about" element={<About />}>
           <Route path="member" element={<div>맴버임</div>} />
