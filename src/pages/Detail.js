@@ -13,7 +13,7 @@ let RedInput = styled.input`
 
 function Detail(props) {
   let { iid } = useParams();
-  const 상품 = props.shoes.find((e) => e.id == iid);
+  let 상품 = props.shoes.find((e) => e.id == iid);
   let [alert, setAlert] = useState(true);
   let [탭, 탭변경] = useState(0);
 
@@ -21,6 +21,19 @@ function Detail(props) {
   let dispatch = useDispatch();
 
   let [fade2, setFade2] = useState("");
+
+  useEffect(() => {
+    let 꺼낸거 = localStorage.getItem("watched");
+    //watched 라는 항목에 상품.id를 집어넣어 주세요.
+    꺼낸거 = JSON.parse(꺼낸거);
+    // 꺼낸거.push => 꺼낸 array에 자료를 추가할때
+    // 꺼낸거.push(상품.iid);
+    console.log(꺼낸거);
+    // localStorage.setItem("watched", 꺼낸거); // 여기서 꺼낸거 = [0] 이렇게 되어있을 것임
+    // localStorage에 꺼낸거 [0] 저장
+    localStorage.setItem("watched", JSON.stringify(꺼낸거));
+    //그냥 꺼낸거 하면 깨지기 때문에 위에 형식으로 하면 JSON형식으로 잘 저장됨
+  }, []);
 
   useEffect(() => {
     setFade2("end");

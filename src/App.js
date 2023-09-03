@@ -17,8 +17,13 @@ export let Context1 = createContext();
 
 function App() {
   useEffect(() => {
-    localStorage.setItem("watched", JSON.stringify([]);
+    localStorage.setItem("watched", JSON.stringify([]));
   }, []);
+
+  // 누가 Detail 페이지 접속하면
+  // 그페이지에 보이는 상품id 가져와서
+  // localStorage 에 watched 항목에 추가
+  // 이걸 JS로 번역하면 코딩 끝임
 
   let obj = { name: "kim" };
   JSON.stringify(obj);
