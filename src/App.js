@@ -4,37 +4,37 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { createContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import data from "./data.js";
 import Detail from "./pages/detail.js";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 // import { Button, Nav, Navbar, Container } from "react-bootstrap";
 import axios from "axios";
 import Cart from "./pages/Cart.js";
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from "@tanstack/react-query";
 
-export let Context1 = createContext();
 //갖다 쓰고 싶으면 export 붙여놓으면 자식 파일에서 불러올 수 잇음
 
 function App() {
-  useEffect(() => {
-    localStorage.setItem("watched", JSON.stringify([]));
-  }, []);
-
-  // 누가 Detail 페이지 접속하면
-  // 그페이지에 보이는 상품id 가져와서
-  // localStorage 에 watched 항목에 추가
-  // 이걸 JS로 번역하면 코딩 끝임
-
-  let obj = { name: "kim" };
-  JSON.stringify(obj);
-  localStorage.setItem("data", JSON.stringify(obj));
-  let 꺼낸거 = localStorage.getItem("data");
-  console.log(JSON.parse(꺼낸거));
-  console.log(JSON.parse(꺼낸거).name);
-
   let [shoes, setShoes] = useState(data);
   let [재고] = useState([10, 11, 12]);
   let navigate = useNavigate();
+
+  //진짜 개 미친듯이 개 짜증남 왜 강의는 useQuery('작명', ()=> 이래삿더니
+  //useQuery(["작명"],()=> 해야 되는걸 왜 안 알려주냐고 아ㅗ
+  let result = useQuery(
+    ["작명"],
+    () =>
+      axios.get("https://codingapple1.github.io/userdata.json").then((a) => {
+        console.log("요청됨");
+        return a.data;
+      }),
+    { staleTime: 2000 }
+  );
 
   return (
     <div className="App">
@@ -65,6 +65,12 @@ function App() {
             >
               Cart
             </Nav.Link>
+          </Nav>
+          <Nav className="ms-auto">
+            {/* {result.isLoading ? "로딩중" : result.data.name} */}
+            {result.isLoading && "로딩중"}
+            {result.error && "에러남"}
+            {result.data && result.data.name}
           </Nav>
         </Container>
       </Navbar>
