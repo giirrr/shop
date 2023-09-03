@@ -2,7 +2,7 @@ import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { changeName, increase } from "./../store/userSlice.js";
 import { addCount } from "./../store.js";
-import { memo, useState } from "react";
+import { memo, useState, useTransition, useDeferredValue } from "react";
 
 // function Child() {
 //   console.log("재랜더링 됨");
@@ -13,15 +13,21 @@ let Child = memo(function () {
   console.log("재렌더링됨");
   return <div>자식임</div>;
 });
-//위에 처럼 함수 선언하고 전체를 memo로 감싸주면 됨
-//child라는 컴포넌트 여기로 전송되는 props가 변할 때만 재렌더링 해줌
-//기존 Porps랑 ==신규 props랑 계속 같은지 비교해볼듯
+// 위에 처럼 함수 선언하고 전체를 memo로 감싸주면 됨
+// child라는 컴포넌트 여기로 전송되는 props가 변할 때만 재렌더링 해줌
+// 기존 Porps랑 ==신규 props랑 계속 같은지 비교해볼듯
+// 따라서 전송되는 props가 길고 복잡하다 => 시간 오래걸리고 손해
+// 주로 꼭 필요한 주로 무거운 컴포넌트에 작성, 실은 대부분 붙일 일 없다하네 ㅋ
+let a = new Array(10000).fill(0);
 
 function Cart() {
   let state = useSelector((state) => state);
   let dispatch = useDispatch();
   //store.js로 요청을 보내주는 함수 ,
   let [count, setCount] = useState(0);
+  let [name, setName] = useState("");
+  let [isPending, 늦게처리] = useTransition();
+  let state2 = useDeferredValue(state);
   return (
     <div>
       <Child count={count}></Child>
@@ -35,6 +41,19 @@ function Cart() {
       <h6>
         {state.user.name} {state.user.age} 의 장바구니
       </h6>
+      <input
+        onChange={(e) => {
+          늦게처리(() => {
+            setName(e.target.value);
+          });
+        }}
+      />
+
+      {isPending
+        ? "로딩중"
+        : a.map(() => {
+            return <div>{name}</div>;
+          })}
       <button
         onClick={() => {
           dispatch(increase(100));
