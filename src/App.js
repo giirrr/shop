@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import data from "./data.js";
 import Detail from "./pages/detail.js";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
@@ -16,6 +16,17 @@ export let Context1 = createContext();
 //갖다 쓰고 싶으면 export 붙여놓으면 자식 파일에서 불러올 수 잇음
 
 function App() {
+  useEffect(() => {
+    localStorage.setItem("watched", JSON.stringify([]);
+  }, []);
+
+  let obj = { name: "kim" };
+  JSON.stringify(obj);
+  localStorage.setItem("data", JSON.stringify(obj));
+  let 꺼낸거 = localStorage.getItem("data");
+  console.log(JSON.parse(꺼낸거));
+  console.log(JSON.parse(꺼낸거).name);
+
   let [shoes, setShoes] = useState(data);
   let [재고] = useState([10, 11, 12]);
   let navigate = useNavigate();
