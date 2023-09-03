@@ -14,7 +14,7 @@ import {
   QueryClientProvider,
   useQuery,
 } from "@tanstack/react-query";
-
+import Ttest from "./ttest.js";
 // import Detail from "./pages/detail.js";
 // import Cart from "./pages/Cart.js";
 
@@ -122,6 +122,7 @@ function App() {
         <Detail shoes={shoes} /> </Suspense>} /> */}
           {/* 이렇게 감싸거나 아니면 Routes를 통째로 감싸도 무방함 */}
           <Route path="/cart" element={<Cart />}></Route>
+          <Route path="/ttest" element={<Ttest />}></Route>
 
           <Route path="/about" element={<About />}>
             <Route path="member" element={<div>맴버임</div>} />
